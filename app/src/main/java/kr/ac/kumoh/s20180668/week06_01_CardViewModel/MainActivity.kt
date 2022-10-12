@@ -1,9 +1,9 @@
-package kr.ac.kumoh.s20180668.week05_01_carddealer
+package kr.ac.kumoh.s20180668.week06_01_CardViewModel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kr.ac.kumoh.s20180668.week05_01_carddealer.databinding.ActivityMainBinding
+import kr.ac.kumoh.s20180668.week06_01_CardViewModel.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {

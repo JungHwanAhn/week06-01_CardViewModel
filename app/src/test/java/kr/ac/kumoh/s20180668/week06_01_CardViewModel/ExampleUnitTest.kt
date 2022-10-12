@@ -1,4 +1,4 @@
-package kr.ac.kumoh.s20180668.week05_01_carddealer
+package kr.ac.kumoh.s20180668.week06_01_CardViewModel
 
 import org.junit.Test
 
