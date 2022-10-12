@@ -3,40 +3,24 @@ package kr.ac.kumoh.s20180668.week06_01_CardViewModel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import kr.ac.kumoh.s20180668.week06_01_CardViewModel.databinding.ActivityMainBinding
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val model: CardViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //setContentView(R.layout.activity_main)
         setContentView(binding.root)
-        /*
-        var c = Random.nextInt(52)
-        Log.i("Test", "$c : ${getCardName(c)}")
 
-        var res = resources.getIdentifier(
-            getCardName(c),
-            "drawable",
-            packageName
-        )
-
-        binding.card1.setImageResource(res)
-        */
-        binding.btnDeal.setOnClickListener {
-            var c = IntArray(5);
-            var res = IntArray(5)
-
-            for (i in c.indices) {
-                c[i] = Random.nextInt(52)
-                Log.i("Test", "${c[i]} : +" +
-                        "${getCardName(c[i])}")
-
+        model.cards.observe(this, Observer<IntArray> {
+            val res = IntArray(5)
+            for (i in it.indices) {
                 res[i] = resources.getIdentifier(
-                    getCardName(c[i]),
+                    getCardName(it[i]),
                     "drawable",
                     packageName
                 )
@@ -46,11 +30,16 @@ class MainActivity : AppCompatActivity() {
             binding.card3.setImageResource(res[2])
             binding.card4.setImageResource(res[3])
             binding.card5.setImageResource(res[4])
-        }
+        })
 
+        binding.btnDeal.setOnClickListener {
+            model.deal()
+        }
     }
+
     private fun getCardName(c: Int) : String {
-        val shape = when(c/13) {
+        Log.i("Card", c.toString())
+        val shape = when (c / 13) {
             0 -> "spades"
             1 -> "diamonds"
             2 -> "hearts"
